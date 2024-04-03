@@ -343,10 +343,9 @@ export const SalesValueWidgetPhone = (props) => {
   const percentageColor = percentage < 0 ? "text-danger" : "text-success";
 
   return (
-    <Card.Body className="p-2">
+    <Card.Body className="">
     <SalesValueChart 
-       height="200px"
-       width="200px"
+       
        options={{ maintainAspectRatio: false }}/>
   </Card.Body>
 

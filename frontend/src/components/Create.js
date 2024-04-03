@@ -69,7 +69,7 @@ const handleSubmit =  async (e) => {
             <Col xs={6} className="d-flex align-items-center justify-content-center col-12 col-lg-6 ">
               <div className="mb-4 mb-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-400">
                 <div className="text-center text-md-center mb-4 mt-md-0">
-                  <h3 className="mb-0">Creation 'un compte</h3>
+                  <h3 className="mb-0">Créer un compte</h3>
                 </div>
                 <Form className="mt-2 "  onSubmit={handleSubmit}>
                   <Form.Group id="user" className="mb-2">

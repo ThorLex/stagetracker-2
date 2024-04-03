@@ -1,6 +1,0 @@
-
-
-const openai = require('openai');
-
-
-

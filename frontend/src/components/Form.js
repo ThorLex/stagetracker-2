@@ -1,11 +1,10 @@
 import {React, useState, useEffect} from 'react';
-import moment from "moment-timezone";
-import Datetime from "react-datetime";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Form, Container, InputGroup } from 'react-bootstrap';
 import Side from'./Side'
-import ColorSchemesExample from "./Navbar"
+
 
 
 export default () => {
@@ -36,7 +35,7 @@ const email = "beyasbekono@gmail.com"
   return (
     <article>         
     <Side className="justify-content-center" pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> 
-      <ColorSchemesExample></ColorSchemesExample>
+    
 
       <Container className="py-5">
         <Row className="d-flex flex-wrap flex-md-nowrap align-items-center py-4">

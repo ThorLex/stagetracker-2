@@ -2,7 +2,7 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCashRegister, faChartLine, faHome ,faCloudUploadAlt, faPercentage, faPlus, faRocket, faTasks, faUser, faUserShield } from '@fortawesome/free-solid-svg-icons';
-import ColorSchemesExample from "./Navbar"
+
 import Side from'./Side'
 import Table from 'react-bootstrap/Table'
 
@@ -11,7 +11,7 @@ import {Dropdown, Col, Row, Card, Image, Button, Breadcrumb, ListGroup, Progress
 import Chart from "chart.js/auto";
 
 import { useState } from "react";
-import "./Side.css"
+
 import   Logo from "./../assets/logo.png"
 import { Data } from "./data.js";
 import PieChart from "../components/PieChart.js";
@@ -79,7 +79,7 @@ export default () => {
       
 
           <Card>
-          <ColorSchemesExample className="justify-content-sm-center "/>
+      
 
 
        

@@ -1,25 +1,13 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
-import "./Side.css"
+
 
 export default props => {
   return (
     
      <Menu>  
     <nav className="sidebar ">
-    
-    <header>
-      <div className="image-text">
-        <span className="image">
-          {/*<img src="logo.png" alt="">*/}
-        </span>
-        <div className="text logo-text">
-          <span className="name">Codinglab</span>
-          <span className="profession">Web developer</span>
-        </div>
-      </div>
-      <i className="bx bx-chevron-right toggle bottom-content" />
-    </header>
+
     <div className="menu-bar">
       <div className="menu">
         <li className="search-box">

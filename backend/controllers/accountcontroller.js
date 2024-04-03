@@ -4,8 +4,10 @@
 const User = require ('../models/usermodels')
 const mongoose = require('mongoose')
 const jwt =  require('jsonwebtoken')
-const sendEmail = require("./sendEmail");
-const rapport = require('./Rapport')
+
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+ 
+
 
 
 //creation d un jeton de securite
@@ -53,49 +55,28 @@ const sendMail = async (req, res) => {
 
 
 const GenererRapport = async (req, res) => {
-  const apiKey = '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';
+
+  // Set the Bard API key
  
-  const axios = require('axios');
-
-  const client = axios.create({
-      headers: { 'Authorization': 'Bearer ' + apiKey }
-  });
-  
-  const params = {
-    "prompt": "Once upon a time", 
-    "max_tokens": 10
-  }
-  
-  client.post('https://api.openai.com/v1/engines/davinci/completions', params)
-    .then(result => {
-      console.log(params.prompt + result.data.choices[0].text);
-  }).catch(err => {
-    console.log(err);
-  });
 
 
+  const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-
-  // try {
-  //   const response = await axios.post(
-  //     'https://api.openai.com/v1/engines/davinci-codex/completions',
-      
-  //     {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer${apiKey}`,
-  //       },
-  //     }
-  //   );
-  
-  //   const moi =  res.json({ reply: response.data.choices[0].text });
-  // } catch (error) {
-  //   console.error(error);
-  //   const moi =  res.status(500).json({ error: 'An error occurred' });
-  //   return moi
-  // }
  
+
+  const genAI = new GoogleGenerativeAI('AIzaSyBkWg81DlrkQ6eof00mdGYkWdbuMrQ8EkU');
+
+    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
   
+    const prompt = " j aimerai que tu m e genere une decisionnel afin de predire seloon les performance d'un etudiant d'un eleve appellé bekono dans le cadre de son rapport de stage aves des graphique predisant sa futur evolution  voici ses donnees  maths:18, informatique: 15 geographie:2 .je veux le resultat sous forme se donnees sous format sous forme de fichier html css  ne  materialise les expaces par des espace reel et enleve les \n  et les **\n et les \n\  "
+  
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text()
+    console.log(text);
+    return  text,  res.status(200)
+
+
 }
 
 

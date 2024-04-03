@@ -137,9 +137,7 @@
 
     transition: all 0.5s;
   font-family: "poppins", sans-serif;
-  font-size: 17px;
-  font-size-adjust: inherit;
-  
+
   }
 .link{
 text-decoration: none;
@@ -182,11 +180,7 @@ color: #4154f1;
 } 
   
 
- #root
- {
 
-
- }
 #hid{
 display: none;
 visibility: hidden;
@@ -270,14 +264,10 @@ header {
  padding-left: 20px;
 }
 
-index.css
 
 
-* {
- box-sizing: border-box;
- padding: 0;
- margin: 0;
-}
+
+
 
 :root {
  --header-height: 3.5rem;
@@ -294,11 +284,7 @@ index.css
  --z-fixed: 100;
 }
 
-body {
- background-color: var(--body-color);
- color: var(--text-color);
- font-family: var(--body-font);
-}
+
 
 ul {
  list-style: none;
