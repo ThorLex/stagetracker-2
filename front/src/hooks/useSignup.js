@@ -11,10 +11,10 @@ export const useSignup = () => {
     setIsLoading(true)
     setError(null)
     setisvalid(false)
-    const response = await fetch('/api/user', {
+    const response = await fetch('/api/user/signup', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ username, email, password })
+      body: JSON.stringify({username, email, password })
     })
     const json = await response.json()
 
@@ -23,6 +23,7 @@ export const useSignup = () => {
       setError(json.error)
       setisvalid(false)
       console.log("une erreur s'est produite")
+      console.log( username, email, password)
     }
     if (response.ok) {
       // save the user to local storage

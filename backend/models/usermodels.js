@@ -33,7 +33,7 @@ const userSchema = new Schema ({
 // ici je creer ma propre methode singnup ou je verifie que l email n as pas ete pris  si c est bon je crerr l utilisateur avec un mot de passe encrypté
 
 
-userSchema.statics.signup = async function(email, password) {
+userSchema.statics.signup = async function(username,email, password) {
 
   // validation
   if (!email || !password) {
@@ -55,7 +55,7 @@ userSchema.statics.signup = async function(email, password) {
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 
-  const user = await this.create({ email, password: hash })
+  const user = await this.create({username, email, password: hash })
 
   return user
 }

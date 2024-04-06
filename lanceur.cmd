@@ -7,4 +7,4 @@ npm run dev
 
  
 start 
-title package-install
+title installation package

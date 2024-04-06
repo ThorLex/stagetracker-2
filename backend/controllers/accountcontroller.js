@@ -1,6 +1,6 @@
  const Workout = require ('../models/modelcontrolleur')
  const axios =  require("axios")
-
+const  sendEmail = require("sendEmail")
 const User = require ('../models/usermodels')
 const mongoose = require('mongoose')
 const jwt =  require('jsonwebtoken')
@@ -156,15 +156,12 @@ const getWorkouts = async (req, res) => {
 const signupUser =  async(req,res) => {
 
     
- const {email , password} = req.body 
+ const {username, email , password} = req.body 
 try {
-     const user = await User.signup(email,password)
-     // creation d un jeton de securite 
+     const user = await User.signup(username, email,password)
 const  token  =  createToken(user._id)
-
      return  res.status(200).json({email,token,user})
 } catch (error) {
- 
    return   res.status(404).json({erreur: error.message})
 }
 

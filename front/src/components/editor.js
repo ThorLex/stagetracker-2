@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import Header from './header';
+import {Form}  from "react-bootstrap";
 export default function App() {
     const [valeur, setvaleur] = useState('')
     const [valeur1, setvaleurr] = useState()
@@ -30,14 +31,13 @@ export default function App() {
       
        <section className="section profile">
 <div className="row">
-
 <div className="card m-4">
   <div className="card-body">
     <h5 className="card-title"> formulaire de remplisage des information</h5>
     {/* No Labels Form */}
     <Form className="row g-3"  >
       <div className="col-md-12">
-        <input type="text"   className="form-control" placeholder=" Intitule de la tache" />
+        <input type="text" className="form-control" placeholder=" Intitule de la tache" />
       </div>
       <div className="col-md-4">
         <select id="inputState"   className="form-select">
@@ -49,7 +49,8 @@ export default function App() {
       </div>
 
       <div className="col-md-4">
-        <select id="inputState"className="form-select">
+        <select id="inputState"
+       className="form-select">
           <option selected>accompagnement</option>
           <option value={"bekono"}>bekono beyas</option>
           <option value={"ambroise"}>  ambroise beyas</option>
@@ -59,7 +60,7 @@ export default function App() {
       </div>
      
       <div className="col-md-12">
-        <input type="number"  className="form-control" placeholder="inserer une valeur" />
+        <input type="number"   className="form-control" placeholder="inserer une valeur" />
       </div>
      
      
@@ -70,7 +71,6 @@ export default function App() {
     </Form>{/* End No Labels Form */}
   </div>
 </div>
-
 <div className="col-xl-12">
  <div className="card">
 

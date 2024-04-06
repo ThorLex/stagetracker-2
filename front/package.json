@@ -1,8 +1,7 @@
 {
-  "name": "stage_tracker",
+  "name": "front",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
@@ -41,6 +40,8 @@
     "sass": "^1.72.0",
     "simplebar-react": "^3.2.4",
     "sweetalert": "^2.1.2",
+   
+    
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -49,25 +50,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest",
-      "plugin:react/recommended"
-    ],
-    "plugins": [
-      "react"
-    ],
-    "rules": {
-      "react/forbid-foreign-prop-types": "warn",
-      "react/jsx-no-comment-textnodes": "warn",
-      "react/jsx-no-duplicate-props": "warn",
-      "react/jsx-no-target-blank": "warn"
-    }
+      "react-app/jest"
+    ]
   },
-  
-
   "browserslist": {
     "production": [
       ">0.2%",
@@ -79,16 +67,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
-  "keywords": [
-    "mern",
-    "app"
-  ],
-  "author": "bekono beyas ambroise",
-  "license": "ISC",
-  "devDependencies": {
-    "eslint-plugin-react": "^7.34.1"
   }
 }
