@@ -44,8 +44,8 @@ const userSchema = new Schema ({
 // ici je creer ma propre methode singnup ou je verifie que l email n as pas ete pris  si c est bon je crerr l utilisateur avec un mot de passe encrypté
 
 
-userSchema.statics.signup = async function(username,email, password) {
-
+userSchema.statics.signup = async function(username, email,password) {
+ console.log(username, email,password)
   // validation
   if (!email || !password) {
     throw Error('All fields must be filled')
