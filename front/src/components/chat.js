@@ -59,12 +59,10 @@ function Dash() {
         
           
                 <div className="d-flex flex-row justify-content-end mb-4 pt-1 ">
-               if (username == "bekono") {
-                  console.log("bekono")
-                 }
+              
               
                 {messages.map((message, index) => (
-          <Message key={index} username={"beyas"} text={message.text} position={position} />
+          <Message key={index} username={"beyas"} text={message.text}  />
         ))}
 
       
