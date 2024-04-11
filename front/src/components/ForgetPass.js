@@ -47,8 +47,8 @@ const handleSubmit =  async (e) => {
     const response = await fetch('/api/user/forgot', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email,contenu,sujet})
-    })
+      body: JSON.stringify({ sujet,contenu,email})
+    })  
 
     const json = await response.json()
     

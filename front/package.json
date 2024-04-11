@@ -47,6 +47,7 @@
     "sass": "^1.72.0",
     "simplebar-react": "^3.2.4",
     "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
     "stream-chat": "^8.25.1",
     "stream-chat-react": "^11.13.1",
     "sweetalert": "^2.1.2",

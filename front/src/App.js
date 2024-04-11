@@ -9,9 +9,11 @@ import Editor from "./components/editor";
 import Dash  from './components/dash';
 import Tableau from './components/tableau';
 
+
 import Chat from './components/chat'
 import Error from "./components/patherror"
 import Errorr from "./components/welcome"
+
 
 
 
@@ -34,7 +36,9 @@ function App() {
             <Route exact path="/admin_user" element={< Admin />} />
             <Route exact path="/generate" element={ < Editor />  } /> 
             <Route exact path='*' element={<Error/>}/>
+          
             <Route exact path='/' element={<Errorr/>}/>
+           
           
           </Routes>
 

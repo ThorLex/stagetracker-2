@@ -1,55 +1,36 @@
-import {React , useState, useEffect }from "react";
-import './dash.css'
-import './chat.css' ;
+import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
+import Message from './Message';
 import Header from "./header.js";
 
+const socket = io('http://localhost:5001');
 
-import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
+function Dash() {
+  const user = localStorage.getItem("user")
+  const me = JSON.parse(user)
+  const username = me.email
+  console.log(me.email)
+  const [messages, setMessages] = useState([]);
+  const [messageText, setMessageText] = useState('');
 
-const Dash = () => {
-    const username = "bekono";
-    const [message, setMessage]= useState("")
-    const [monTableau, setMonTableau] = useState([])
-    const [toiTableau, setToiTableau] = useState([])
-
-
-    const handleSend =  async (e) => {
-        const response = await fetch('/api/user/chat', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({ username , message })
-        })
-      
-const json = await response.json()
- console.log(json.stagetracker)
- setMonTableau(json.stagetracker)
- console.log(monTableau)  
-const mesValeurs = json.stagetracker.filter(item => item.username === "bekono");
-const autresValeurs = json.stagetracker.filter(item => item.username !== "bekono");
-setMonTableau(mesValeurs)
-setToiTableau(autresValeurs)
-   
-      }
-
-      
+  useEffect(() => {
+    socket.on('message', (message) => {
+      setMessages([...messages, message]);
+    });
+  }, [messages]);
 
 
+  const sendMessage = () => {
+    socket.emit('sendMessage', { text: messageText });
+    setMessageText('');
+  };
 
-
-    useEffect(() => {
-       console.log(message)
-      });
-    
- 
-
-   
-    return ( 
-
-<div>
- <Header></Header>
-  <main id="main" className="main">
+  return (
+    <div>
+     <Header></Header>
+     <main id="main" className="main">
     <div className="pagetitle">
-      <h1>Messagerie chat</h1>
+      <h1>Acceuil</h1>
       <nav>
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><a href="index.html">Acceuil</a></li>
@@ -57,6 +38,10 @@ setToiTableau(autresValeurs)
         </ol>
       </nav>
     </div>{/* End Page Title */}
+    <section className="section">
+    <div className="App">
+  
+
     <section className="section">
       <div className="row">
         <div className="col-lg-12 col-12">
@@ -69,101 +54,70 @@ setToiTableau(autresValeurs)
                   <p
                     className="text-center mx-3 mb-0"
                     style={{ color: "#a2aab7" }}
-                  >
-                 messages
-                  </p>
-                </div>
-  
-           
-              <>
-                <div className="d-flex flex-row justify-content-start">
-          </div>
-      
-               
-
-          {monTableau.map((item, index) => (
-            
-          <div key={index}>
- 
-
-  <div className="d-flex flex-row justify-content-start mb-4 pt-1">
-                  <div>
-                    <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
-                    {item.message}
-                    </p>
-                   
-                    <p className="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">
-                    {item.createdAt}
-                    </p>
-                  </div>
-                 <div className="username"> {item.username}</div>
-                </div>
-
-              
-               
-                   {/* <small className="fs-10">{item.createdAt}</small> */}
-               
-                </div>
+                  > messages </p></div> </h5>
           
-
-                ))}
- {/* pour autre  */}
-                <div className="d-flex flex-row justify-content-start mb-4 pt-1">
-                  <div>
-                    <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas fugiat veniam totam ex eius placeat numquam reprehenderit quo enim.
-                    </p>
-                   
-                    <p className="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-top">
-                      00:06
-                    </p>
-                  </div>
-                 <div className="username">Divine</div>
-                </div>
-
-                <div className="d-flex flex-row justify-content-start mb-4">
-                 
-             
-                </div>
-
-
-
-                
-              </>
-          
-
-               </h5>
-          
-               </div>
-                
-              <form  className="row m-5" action="">
-                    <textarea onChange={(e)=> setMessage(e.target.value)} value={message} className=" form-control my-2 col-9" name="" id="" cols="10" rows="2" placeholder="Ecrire un message..."></textarea>
-                 
-                    {monTableau && message != "" && <div className="form-control col-2 col-lg-1 btn btn-success" onClick={(e)=> handleSend()}> Ecrire</div>}
-                   {!monTableau && <div className="form-control col-2 col-lg-1 btn btn-success" onClick={(e)=> handleSend()}> demmarrer la session </div>}
-                </form>
-          </div>
-        </div>
-      
-
         
-      </div>
+          
+                <div className="d-flex flex-row justify-content-end mb-4 pt-1 ">
+               if (username == "bekono") {
+                  console.log("bekono")
+                 }
+              
+                {messages.map((message, index) => (
+          <Message key={index} username={"beyas"} text={message.text} position={position} />
+        ))}
 
- 
-    </section>
-  </main>{/* End #main */}
-  {/* ======= Footer ======= */}
-  <footer id="footer" className="footer">
-    <div className="copyright">
-      © Copyright <strong><span>Stage Tracker</span></strong>. 
-    </div>
+      
+                </div>
+
+                <form className='row col-10 m-5' action="">
+        <textarea onChange={(e)=> setMessageText(e.target.value)} value={messageText} className=" form-control my-2 col-9" name="" id="" cols="10" rows="2" placeholder="Ecrire un message..."></textarea>
+        <div className="form-control col-2 col-lg-1 btn btn-success" onClick={(e)=> sendMessage()}> Ecrire</div>
+        </form>
+
+
+                
    
-  </footer>{/* End Footer */}
-  <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></a>
-</div>
 
 
-     );
-}
+
+
+
+              </div>
+            </div>
+          </div> 
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+      
+
+
+
+
+
+      
+    </div>
+    </section>
+    </main>
  
+</div> 
+
+
+  );
+}
+
 export default Dash;
