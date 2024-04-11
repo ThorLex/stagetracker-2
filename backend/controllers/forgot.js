@@ -1,26 +1,8 @@
 const nodemailer = require("nodemailer");
 const User = require ('../models/usermodels')
-
-
-
-  
-const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
  
-
-
-
+const forgot = async (subject, message, send_to, sent_from, reply_to) => {
     const user = await User.updated(send_to)
-    
-   
-    
-
- 
-
- 
-   
-
-
-
   const transporter = nodemailer.createTransport({
    
 
@@ -39,8 +21,8 @@ const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
     from: sent_from,
     to: send_to,
     replyTo: reply_to,
-    subject: subject,
-    html: + message + "votre nouveau mot de passe est " +  user,
+    subject: "Recuperation de mot de passe ",
+    html: + message + " votre nouveau mot de passe est " +  user,
   };
 
   
@@ -54,4 +36,4 @@ const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
   });
 };
 
-module.exports = sendEmail;
+module.exports = forgot;

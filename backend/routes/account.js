@@ -10,18 +10,21 @@ const express = require("express");
    getWorkout, 
    createWorkout, 
    deleteWorkout, 
-   updateWorkout
+   updateWorkout,
+ 
  } = require('../controllers/accountcontroller')
  
-  const {signupUser, loginUser,sendMail} = require ('../controllers/accountcontroller')
+  const {signupUser, loginUser,sendMail,chatt, chatget, forgott} = require ('../controllers/accountcontroller')
 
 const router = express.Router();
 
 //route pour la connection
    router.post("/login", loginUser);
    router.post("/signup", signupUser);
-   
-router.post("/forgot",sendMail);
+   router.post("/chat",chatt);
+
+   router.get("/chat",chatget);
+router.post("/forgot",forgott);
  
  
 
@@ -33,6 +36,8 @@ router.get('/', getWorkouts)
 
 // GET a single workout
 router.get('/:id', getWorkout)
+
+
 
 // POST a new workout
 router.post('/creation', createWorkout)

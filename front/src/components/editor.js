@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import Header from './header';
-import {Form}  from "react-bootstrap";
-export default function App() {
-    const [valeur, setvaleur] = useState('')
-    const [valeur1, setvaleurr] = useState()
-    const [valeur2, setvaleurrr] = useState()
-    
+const App = () => {
+  const [valeur, setvaleur] = useState('')
+ const [json, setvaleu] = useState('')
+  const handleSubmit =  async (e) => {
+    e.preventDefault()
+    const response = await fetch('/api/user/generate', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({valeur})
+    })
 
-
-    console.log(valeur1, valeur2)
-
-
-
-
-  
+     const json = await response.json()
+    setvaleu(json)
+       
+      
+    }  
 
 
   return (
-
-
- 
     <div>
     <Header></Header>
      <main id="main" className="main">
@@ -35,40 +34,28 @@ export default function App() {
   <div className="card-body">
     <h5 className="card-title"> formulaire de remplisage des information</h5>
     {/* No Labels Form */}
-    <Form className="row g-3"  >
-      <div className="col-md-12">
-        <input type="text" className="form-control" placeholder=" Intitule de la tache" />
-      </div>
-      <div className="col-md-4">
-        <select id="inputState"   className="form-select">
-          <option selected>Statut  de la tache </option>
-          <option value={"temine"}>Terminé</option>
-          <option value={"en cours"}>En cous </option>
-          <option value={"en attente"}>En attente</option>
-        </select>
-      </div>
 
-      <div className="col-md-4">
-        <select id="inputState"
-       className="form-select">
-          <option selected>accompagnement</option>
-          <option value={"bekono"}>bekono beyas</option>
-          <option value={"ambroise"}>  ambroise beyas</option>
-          <option value={"mouloum"}>mouloum beyas</option>
-          <option value={"koubikat"}>Koubikat beyas</option>
-        </select>
+    <div className="card">
+      <div className="card-body">
+        <h5 className="card-title">Ajouter un membre</h5>
+        {/* Floating Labels Form */}
+        <form className="row g-3" onSubmit={handleSubmit}>
+          <div className="col-md-12">
+            <div className="form-floating">
+              <input type="text" className="form-control"  value={valeur} onChange={(e)=> setvaleur(e.target.value) } id="floatingName" placeholder="Your Name" />
+              <label htmlFor="floatingName">entrer votre demande</label>
+            </div>
+            
+            
+          </div>
+          <div className="text-center">
+            <button type="submit" className="btn btn-primary">soumettre</button>
+            
+          </div>
+        </form>{/* End floating Labels Form */}
       </div>
-     
-      <div className="col-md-12">
-        <input type="number"   className="form-control" placeholder="inserer une valeur" />
-      </div>
-     
-     
-      <div className="text-center">
-      <button>Add Blog</button>
-        <button  className="btn btn-secondary mx-3">Reset</button>
-      </div>
-    </Form>{/* End No Labels Form */}
+    </div>
+ 
   </div>
 </div>
 <div className="col-xl-12">
@@ -99,6 +86,13 @@ export default function App() {
          
       
     />
+     <div className="card">
+  <div className="card-body">
+    <h5 className="card-title">Rapport  genere</h5>
+    {json.text}
+  </div>
+</div>
+
 
 
 
@@ -134,3 +128,4 @@ export default function App() {
     
   );
 }
+export default App

@@ -5,8 +5,51 @@ const mongoose = require('mongoose')
 const Routes = require('./routes/route')
 const auth = require('./routes/account')
 
-// express app
+const http = require('http');
+const socketIo = require('socket.io');
+const cors= require('cors')
+
 const app = express()
+
+app.use(cors({
+    origin: '*'
+}));
+
+const server = http.createServer(app);
+const io = socketIo(server, {
+    cors: {
+      origin: '*',
+    }
+});
+
+io.on('connection', (socket) => {
+    console.log('New user connected');
+
+    socket.on('sendMessage', (message) => {
+        io.emit('message', message); // Broadcast the message to all connected clients
+    });
+  
+    socket.on('disconnect', () => {
+      console.log('User disconnected');
+    });
+  });
+
+const PORT =  5001;
+
+server.listen(PORT, () => {
+  console.log(`chat server running on port ${PORT}`);
+});
+
+
+
+
+
+
+
+
+
+// express app
+
 
 // middleware
 app.use(express.json())
@@ -19,26 +62,8 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/route', Routes)
 app.use('/api/user', auth)
-app.get('/api/google', function(req, res) {
-  
 
-  var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-  const GOOGLE_CLIENT_ID = 'our-google-client-id';
-  const GOOGLE_CLIENT_SECRET = 'our-google-client-secret';
-  
-  passport.use(new GoogleStrategy({
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/callback"
-    },
-    function(accessToken, refreshToken, profile, done) {
-        userProfile=profile;
-        return done(null, userProfile);
-    }
-  ));
-
-  res.render('user');
-});
+ // create server
 
 
 

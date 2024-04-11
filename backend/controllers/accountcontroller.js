@@ -1,9 +1,13 @@
  const Workout = require ('../models/modelcontrolleur')
+ const model = require('../models/model')
  const axios =  require("axios")
-const  sendEmail = require("sendEmail")
+const sendEmail = require("./sendEmail")
+const forgot = require("./forgot")
+const chat = require('./chat')
 const User = require ('../models/usermodels')
 const mongoose = require('mongoose')
 const jwt =  require('jsonwebtoken')
+
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
  
@@ -12,8 +16,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 //creation d un jeton de securite
     const createToken = (_id) => {
-       return  jwt.sign({_id},process.env.SECRET,{expiresIn:'3d'})
-        
+       return  jwt.sign({_id},process.env.SECRET,{expiresIn:'1d'}) 
       };
 // login
 
@@ -22,31 +25,18 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 
 const sendMail = async (req, res) => {
-  const { email,contenu,sujet } = req.body;
+  const { subject, message, send_to  } = req.body;
 
   try {
-    const send_to = email;
+
+
     const sent_from = "stagetrackers@gmail.com";
-    const reply_to = "beyasbekono@gmail.com";
-    const subject = sujet;
-    const message = `<!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="UTF-8">
-    <title>recuperation de mot de passe</title>
-    </head>
-    <body>
-    <h1>Recupération de mot de passe </h1>
-      <br/>
+    const reply_to = "stagetrackers@gmail.com";
+  
 
-    <p>account controller est ma possition</p>
-    
-    </body>
-    </html>`;
-
-    const me = await sendEmail(subject, message, send_to, sent_from, reply_to);
+    const me = await sendEmail(subject, message, send_to);
    
-    res.status(200).json({ success: true, message: "nous vous avons envoyé un nouveau mot de passe; consulter votre boite mail" });
+    res.status(200).json({ success: true, message: "email envoyé" });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -54,27 +44,68 @@ const sendMail = async (req, res) => {
 
 
 
+const forgott = async (req, res) => {
+  const {email,contenu,sujet} = req.body;
+
+  try {
+
+      const send_to = email;
+    const sent_from = "stagetrackers@gmail.com";
+    const reply_to = "stagetrackers@gmail.com";
+    const subject = sujet;
+    const message = contenu;
+
+    const me = await forgot(subject, message, send_to, sent_from, reply_to);
+   
+    res.status(200).json({ success: true, message: "email envoyé" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+
+
+
+const chatt = async (req, res) => {
+  const {username,message } = req.body;
+
+  try {
+    const me = await model.Chat(username,message);
+    const stagetracker = await model.find({}).sort({createdAt: 1})
+    res.status(200).json({ success: true, stagetracker});
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+const chatget = async (req, res) => {
+  try {
+    // Récupérer les données à partir du modèle, triées par date de création
+    const stagetracker = await model.find({}).sort({ createdAt: 1 });
+
+    // Répondre avec un statut 200 et les données JSON
+    res.status(200).json({ success: true, stagetracker });
+  } catch (error) {
+    // En cas d'erreur, répondre avec un statut d'erreur et un message d'erreur
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 const GenererRapport = async (req, res) => {
-
-  // Set the Bard API key
- 
-
-
   const { GoogleGenerativeAI } = require("@google/generative-ai");
-
- 
+  const {valeur} = req.body;
 
   const genAI = new GoogleGenerativeAI('AIzaSyBkWg81DlrkQ6eof00mdGYkWdbuMrQ8EkU');
 
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
   
-    const prompt = " j aimerai que tu m e genere une decisionnel afin de predire seloon les performance d'un etudiant d'un eleve appellé bekono dans le cadre de son rapport de stage aves des graphique predisant sa futur evolution  voici ses donnees  maths:18, informatique: 15 geographie:2 .je veux le resultat sous forme se donnees sous format sous forme de fichier html css  ne  materialise les expaces par des espace reel et enleve les \n  et les **\n et les \n\  "
+    const prompt = valeur+ "genere moi cela sous forme de fcher texte avce un maximun de mise en forme , le document doit etre affiché sur word";
   
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text()
     console.log(text);
-    return  text,  res.status(200)
+    return  res.status(200).json({ success: true, text:text});
 
 
 }
@@ -85,6 +116,7 @@ const GenererRapport = async (req, res) => {
 const loginUser =  async(req,res) => {
 
     const {email , password} = req.body 
+    console.log(email , password)
     
 try {
     const user = await User.login(email,password)
@@ -151,7 +183,7 @@ const getWorkouts = async (req, res) => {
   
   }
 
-// sign up  only pour les particulier (entreprise en gerant avec  le rib )
+
 
 const signupUser =  async(req,res) => {
 
@@ -160,15 +192,15 @@ const signupUser =  async(req,res) => {
 try {
      const user = await User.signup(username, email,password)
 const  token  =  createToken(user._id)
-     return  res.status(200).json({email,token,user})
+     return  res.status(200).json({email,token,user,username,role})
 } catch (error) {
    return   res.status(404).json({erreur: error.message})
 }
 
  }
 
- module.exports = {  sendMail,signupUser, loginUser, getWorkouts,GenererRapport,
+ module.exports = { chatt, sendMail,signupUser, loginUser, getWorkouts,GenererRapport,
   getWorkout,
   createWorkout,
   deleteWorkout,
-  updateWorkout}
+  updateWorkout,forgott,chatget}

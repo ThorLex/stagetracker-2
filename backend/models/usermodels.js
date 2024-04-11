@@ -24,7 +24,18 @@ const userSchema = new Schema ({
     password: {
         type: String,
         required : true,
-    }
+    },
+
+
+ role: {
+  type:String,
+  required:false
+ },
+
+ username: {
+  type:String,
+  required:false
+ }
 },{ timestamps: true })
 
 // methode statique de login 
@@ -77,7 +88,7 @@ userSchema.statics.login = async function(email,password) {
 
   const user = await this.findOne({ email })
   if (!user) {
-    throw Error('Incorrect email')
+    throw Error('cette email n existe pas dans notre base de donnees')
   }
 
  

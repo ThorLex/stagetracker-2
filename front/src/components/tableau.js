@@ -56,43 +56,43 @@ const Tableau = () => {
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nom</th>
-          <th scope="col">Domaine</th>
+        
           <th scope="col">Staut</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>Brandon Jacob</td>
-          <td>Designer</td>
+          <td>BEKONO BEYAS AMBROISE</td>
+
   
           <td><span class="badge rounded-pill bg-success small">Encadreur</span></td>
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td>Bridie Kessler</td>
-          <td>Developer</td>
+          <td>audin</td>
+   
     
           <td><span class="badge rounded-pill bg-primary">stagiaire</span></td>
         </tr>
         <tr>
           <th scope="row">3</th>
-          <td>Ashleigh Langosh</td>
-          <td>Finance</td>
+          <td>Aside</td>
+
 
           <td><span class="badge rounded-pill bg-success">Encadreur</span></td>
         </tr>
         <tr>
           <th scope="row">4</th>
-          <td>Angus Grady</td>
-          <td>HR</td>
+          <td> vanilla</td>
+        
 
           <td><span class="badge rounded-pill bg-primary">Stagiaire</span></td>
         </tr>
         <tr>
           <th scope="row">5</th>
-          <td>Raheem Lehner</td>
-          <td>Dynamic Division Officer</td>
+          <td>Rayan</td>
+      
 
           <td><span class="badge rounded-pill bg-primary">Stagiaire</span></td>
         </tr>

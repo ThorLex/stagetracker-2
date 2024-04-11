@@ -1,26 +1,10 @@
 const nodemailer = require("nodemailer");
-const User = require ('../models/usermodels')
+
 
 
 
   
 const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
- 
-
-
-
-    const user = await User.updated(send_to)
-    
-   
-    
-
- 
-
- 
-   
-
-
-
   const transporter = nodemailer.createTransport({
    
 
@@ -37,19 +21,19 @@ const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
   
   const options = {
     from: sent_from,
-    to: send_to,
+    to: "beyasbekono@gmail.com",
     replyTo: reply_to,
     subject: subject,
-    html: + message + "votre nouveau mot de passe est " +  user,
+    html: message 
   };
 
   
   // Send Email
   transporter.sendMail(options, function (err, info) {
     if (err) {
-     console.log(err);
+console.log(err)
     } else {
-     console.log(info);
+    console.log(info);
     }
   });
 };

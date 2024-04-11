@@ -15,7 +15,7 @@ import Header from "./header.js";
 
    
 
-const Error = () => {
+const Errorr = () => {
     return (  
 
         
@@ -25,9 +25,9 @@ const Error = () => {
        
 
   <section className="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-    <h1>404</h1>
-    <h2>La page que vous recherché n'existe pas </h2>
-    <Link to ="./home"> <a className="btn">  Retour a l'Acceuil</a> </Link>
+   
+    <img src={logo} alt=""  style={{width:"300px" , height:"300px"}} />
+     <h5 className="fs-2 text-primary"> BIENVENUE SUR STAGE TRACKER  </h5>
    
 
 
@@ -50,4 +50,4 @@ const Error = () => {
     );
 }
  
-export default Error;
+export default Errorr;
