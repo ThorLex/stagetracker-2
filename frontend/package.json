@@ -4,26 +4,19 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-
-
-
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@ionic/react": "^7.6.2",
-    
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "@tinymce/tinymce-react": "^5.0.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "build": "^0.1.4",
     "chart.js": "^4.4.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
@@ -32,34 +25,34 @@
     "material-icons": "^1.13.12",
     "mdb-react-ui-kit": "^7.2.0",
     "moment-timezone": "^0.5.45",
-
+    "npm": "^10.5.2",
     "prism-react-renderer": "^2.3.1",
     "prop-types": "^15.8.1",
-   
+    "react": "^18.2.0",
     "react-activity-feed": "^1.4.0",
     "react-bootstrap": "^2.9.2",
     "react-burger-menu": "^3.0.9",
     "react-chartjs-2": "^5.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-datetime": "^3.2.0",
-   
+    "react-dom": "^18.2.0",
     "react-github-btn": "^1.4.0",
     "react-helmet": "^6.1.0",
     "react-ionicons": "^4.2.1",
     "react-live": "^4.1.6",
-    
     "react-router-dom": "^6.22.3",
     "react-router-hash-link": "^2.4.3",
-   
+    "react-scripts": "5.0.1",
     "react-transition-group": "^4.4.5",
+    "run": "^1.5.0",
     "sass": "^1.72.0",
     "simplebar-react": "^3.2.4",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "stream-chat": "^8.25.1",
     "stream-chat-react": "^11.13.1",
-    "sweetalert": "^2.1.2"
-   
+    "sweetalert": "^2.1.2",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
